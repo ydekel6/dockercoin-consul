@@ -1,0 +1,30 @@
+version: '3'
+services:
+        consul:
+                image: consul
+                restart: unless-stopped
+                command: agent -server -ui -node=server-a -bootstrap-expect=1 -client=0.0.0.0
+                ports:
+                        - 0.0.0.0:8500:8500
+                        - 0.0.0.0:8600:8600/udp
+        rng:
+                build: rng
+                environment:
+                        - SRVRNGPORT=${SRVRNGPORT}
+        hasher:
+                build: hasher
+                environment:
+                        - SRVHASHERPORT=${SRVHASHERPORT}
+        redis:
+                image: redis
+        worker:
+                build: worker
+                environment:
+                        - SRVRNGPORT=${SRVRNGPORT}
+                        - SRVRNGNAME=${SRVRNGNAME}
+                        - SRVHASHERPORT=${SRVHASHERPORT}
+                        - SRVHASHERNAME=${SRVHASHERNAME}
+        webui:
+                build: webui
+                ports:
+                        - 8000:80
