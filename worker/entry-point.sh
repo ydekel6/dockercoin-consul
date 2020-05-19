@@ -17,10 +17,10 @@ until $(curl --output /dev/null --silent --head --fail http://consul:8500); do
     sleep 5
 done
 
-consul kv put worker/SRVHASHERPORT 80
-consul kv put worker/SRVHASHERNAME hasher
-consul kv put worker/SRVRNGPORT 80
-consul kv put worker/SRVRNGNAME rng
+#consul kv put worker/SRVHASHERPORT 80
+#consul kv put worker/SRVHASHERNAME hasher
+#consul kv put worker/SRVRNGPORT 80
+#consul kv put worker/SRVRNGNAME rng
 consul kv put worker/REDISCOON redis
 
-envconsul -kill-signal=SIGHUP -upcase -sanitize -prefix worker -consul $CONSULADDR -log-level debug "$@"
+envconsul -kill-signal=SIGHUP -upcase -sanitize -prefix hasher -prefix rng -prefix worker -consul $CONSULADDR -log-level debug "$@"

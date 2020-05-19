@@ -14,11 +14,11 @@ else:
     logging.getLogger("requests").setLevel(logging.WARNING)
 
 #Environment declaration
-SRVRNGPORT = os.getenv("WORKER_SRVRNGPORT", default = 80)
-SRVRNGNAME = os.getenv("WORKER_SRVRNGNAME", default = "rng")
-SRVHASHERPORT = os.getenv("WORKER_SRVHASHERPORT", default = 80)
-SRVHASHERNAME = os.getenv("WORKER_SRVHASHERNAME", default = "hasher")
-REDISCOON = os.getenv("WORKER_REDISCOON", default = "redis")
+SRVRNGPORT = os.getenv("SRVRNGPORT", default = 80)
+SRVRNGNAME = os.getenv("SRVRNGNAME", default = "rng")
+SRVHASHERPORT = os.getenv("SRVHASHERPORT", default = 80)
+SRVHASHERNAME = os.getenv("SRVHASHERNAME", default = "hasher")
+REDISCOON = os.getenv("REDISCOON", default = "redis")
 
 #dynamic url
 RNGURL = "http://{}:{}/32".format(SRVRNGNAME, SRVRNGPORT)

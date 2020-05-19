@@ -4,27 +4,41 @@ services:
                 image: consul
                 restart: unless-stopped
                 command: agent -server -ui -node=server-a -bootstrap-expect=1 -client=0.0.0.0
+                container_name: consul
                 ports:
                         - 0.0.0.0:8500:8500
                         - 0.0.0.0:8600:8600/udp
         rng:
+                depends_on:
+                        - consul
                 build: rng
+                container_name: rng
                 environment:
                         - SRVRNGPORT=${SRVRNGPORT}
         hasher:
+                depends_on:
+                        - consul
                 build: hasher
+                container_name: hasher
                 environment:
                         - SRVHASHERPORT=${SRVHASHERPORT}
         redis:
                 image: redis
+                container_name: redis
         worker:
+                depends_on:
+                        - consul
                 build: worker
+                container_name: worker
                 environment:
                         - SRVRNGPORT=${SRVRNGPORT}
                         - SRVRNGNAME=${SRVRNGNAME}
                         - SRVHASHERPORT=${SRVHASHERPORT}
                         - SRVHASHERNAME=${SRVHASHERNAME}
         webui:
+                depends_on:
+                        - consul
                 build: webui
+                container_name: webui
                 ports:
                         - 8000:80

@@ -16,7 +16,11 @@ until $(curl --output /dev/null --silent --head --fail http://consul:8500); do
     attempt_counter=$(($attempt_counter+1))
     sleep 5
 done
+
+echo "----------------"
+echo ADDING NEW KEY/VALUE IN CONSUL REMOTE
 consul kv put hasher/SRVHASHERPORT 80
 consul kv put hasher/SRVHASHERNAME hasher
+echo "----------------"
 
 envconsul -kill-signal=SIGHUP -upcase -sanitize -prefix hasher -consul $CONSULADDR -log-level debug "$@"

@@ -4,7 +4,7 @@ import socket
 import time
 
 app = Flask(__name__)
-port = os.getenv("RNG_SRVRNGPORT",default = 80)
+port = os.getenv("SRVRNGPORT",default = 80)
 # Enable debugging if the DEBUG environment variable is set and starts with Y
 app.debug = os.environ.get("DEBUG", "").lower().startswith('y')
 
