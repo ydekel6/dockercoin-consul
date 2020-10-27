@@ -12,7 +12,10 @@ This repo is meant for the completion of the dockercoin project taken from the f
 
 # Usage & Limitations
 
-To see the web UI of the DockerCoin, you can follow port 8000
-To enter the Consul, got to port 8500
+* Enter web UI of the DockerCoin via port 8000.
+
+* Enter the Consul via port 8500.
+
 To change the default ports of the hasher/rng/worker containers, you can change it after you ```docker-compose up``` and enter to the Key/Value tab in the Consul.
+
 You can look at the changes happening from the logs of the docker-compose (you will get some errors until all of the containers are updated).
